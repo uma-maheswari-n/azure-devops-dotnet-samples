@@ -1,3 +1,9 @@
+trigger:
+- master
+stages:
+ - stage: Build
+   jobs:
+   - job: Build
 pool:
   vmImage: vs2017-win2016
 
@@ -19,4 +25,12 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- stage: Deploy
+  jobs:
+   - job: Deploy
+     pool:
+       vmImage: 'vs2017-win2016'
+     steps:
+
+
 
